@@ -1,0 +1,10 @@
+.template-selector {
+  width: 500px;
+  height: 100px;
+  background-color: lightgrey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
