@@ -1,6 +1,5 @@
 .container {
-  background-color: white;
-  max-width: 800px;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,5 +9,5 @@
 }
 
 .template-selector {
-  margin-top: 20px;
+  gap: 15px;
 }
