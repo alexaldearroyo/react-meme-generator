@@ -2,13 +2,7 @@ import './TemplateSelector.css';
 import React from 'react';
 
 const SelectorText = () => {
-  return (
-    <input
-      type="text"
-      className="selector-text"
-      placeholder="Search templates"
-    />
-  );
+  return <input className="selector-text" placeholder="Search templates" />;
 };
 
 const SelectorButton = () => {

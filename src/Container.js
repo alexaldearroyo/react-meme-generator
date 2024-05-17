@@ -2,10 +2,9 @@ import './Container.css';
 import React from 'react';
 import TemplateSelector from './TemplateSelector';
 
-const Container = ({ children }) => {
+const Container = () => {
   return (
     <div className="container">
-      {children}
       <TemplateSelector />
     </div>
   );
