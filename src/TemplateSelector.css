@@ -7,4 +7,14 @@
   justify-content: center;
   border: 1px solid #ccc;
   border-radius: 8px;
+  position: relative; /* Add this line */
+}
+
+.meme-image {
+  position: fixed;
+  /* top: -100px; Adjust this value as needed */
+  /* left: 50%; */
+  transform: translateX(-50%);
+  width: 300px; /* Adjust the size as needed */
+  height: auto;
 }

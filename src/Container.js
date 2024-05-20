@@ -2,10 +2,10 @@ import './Container.css';
 import React from 'react';
 import TemplateSelector from './TemplateSelector';
 
-const Container = () => {
+const Container = ({ setShowImage }) => {
   return (
     <div className="container">
-      <TemplateSelector />
+      <TemplateSelector setShowImage={setShowImage} />
     </div>
   );
 };

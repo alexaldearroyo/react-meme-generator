@@ -43,16 +43,12 @@
 
 // src/App.js:
 
+import './App.css';
 import React from 'react';
 import Container from './Container';
-import './App.css';
 
 function App() {
-  return (
-    <Container>
-      <h1>Meme Generator</h1>
-    </Container>
-  );
+  return <Container>{/* <h1>Meme Generator</h1> */}</Container>;
 }
 
 export default App;
@@ -76,10 +72,7 @@ test('renders learn react link', () => {
 // src/Container.css:
 
 .container {
-  background-color: white;
-  margin: 0 auto;
-  padding: 20px;
-  max-width: 800px;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -88,27 +81,109 @@ test('renders learn react link', () => {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.template-selector {
+  gap: 15px;
+}
+
 ----------------------------------------
 
 // src/Container.js:
 
-import React from 'react';
 import './Container.css';
+import React from 'react';
+import TemplateSelector from './TemplateSelector';
 
-const Container = ({ children }) => {
-  return <div className="container">{children}</div>;
+const Container = () => {
+  return (
+    <div className="container">
+      <TemplateSelector />
+    </div>
+  );
 };
 
 export default Container;
 
 ----------------------------------------
 
+// src/TemplateSelector.css:
+
+.template-selector {
+  width: 500px;
+  height: 100px;
+  background-color: lightgrey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+----------------------------------------
+
+// src/TemplateSelector.js:
+
+import './TemplateSelector.css';
+import React, { useState } from 'react';
+
+const SelectorText = ({ value, onChange }) => {
+  return (
+    <input
+      className="selector-text"
+      placeholder="Search templates"
+      value={value}
+      onChange={onChange}
+    />
+  );
+};
+
+const SelectorButton = ({ onClick }) => {
+  return (
+    <button className="selector-button" onClick={onClick}>
+      Search
+    </button>
+  );
+};
+
+const TemplateSelector = () => {
+  const [inputText, setInputText] = useState('');
+  const [showImage, setShowImage] = useState(false);
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleButtonClick = () => {
+    if (inputText === 'aag') {
+      setShowImage(true);
+    } else {
+      setShowImage(false);
+    }
+  };
+
+  return (
+    <div className="template-selector">
+      <SelectorText value={inputText} onChange={handleInputChange} />
+      <SelectorButton onClick={handleButtonClick} />
+      {showImage && (
+        <img src="https://api.memegen.link/images/aag.png" alt="aag meme" />
+      )}
+    </div>
+  );
+};
+
+export default TemplateSelector;
+
+----------------------------------------
+
 // src/index.css:
 
-body {
+body,
+html {
   background-color: white;
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
   font-family: Arial, sans-serif;
 }
 

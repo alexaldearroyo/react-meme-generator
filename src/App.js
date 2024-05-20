@@ -1,9 +1,24 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Container from './Container';
 
 function App() {
-  return <Container>{/* <h1>Meme Generator</h1> */}</Container>;
+  const [showImage, setShowImage] = useState(false);
+
+  return (
+    <div className="App">
+      {showImage && (
+        <div className="image-container">
+          <img
+            className="meme-image"
+            src="https://api.memegen.link/images/aag.png"
+            alt="aag meme"
+          />
+        </div>
+      )}
+      <Container setShowImage={setShowImage} />
+    </div>
+  );
 }
 
 export default App;

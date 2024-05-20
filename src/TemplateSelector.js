@@ -1,19 +1,45 @@
 import './TemplateSelector.css';
-import React from 'react';
+import React, { useState } from 'react';
 
-const SelectorText = () => {
-  return <input className="selector-text" placeholder="Search templates" />;
+const SelectorText = ({ value, onChange }) => {
+  return (
+    <input
+      className="selector-text"
+      placeholder="Search templates"
+      value={value}
+      onChange={onChange}
+    />
+  );
 };
 
-const SelectorButton = () => {
-  return <button className="selector-button">Search</button>;
+const SelectorButton = ({ onClick }) => {
+  return (
+    <button className="selector-button" onClick={onClick}>
+      Search
+    </button>
+  );
 };
 
-const TemplateSelector = () => {
+const TemplateSelector = ({ setShowImage }) => {
+  const [inputText, setInputText] = useState('');
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleButtonClick = () => {
+    if (inputText === 'aag') {
+      // Change for any name in API
+      setShowImage(true);
+    } else {
+      setShowImage(false);
+    }
+  };
+
   return (
     <div className="template-selector">
-      <SelectorText />
-      <SelectorButton />
+      <SelectorText value={inputText} onChange={handleInputChange} />
+      <SelectorButton onClick={handleButtonClick} />
     </div>
   );
 };
