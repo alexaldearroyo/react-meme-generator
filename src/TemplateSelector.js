@@ -1,54 +1,36 @@
-import './ActionsContainer.css';
-import React, { useState } from 'react';
-import TemplateSelector from './TemplateSelector';
-import TextGenerator from './TextGenerator';
+import './TemplateSelector.css';
+import React from 'react';
 
-const ActionsContainer = ({ setShowImage }) => {
-  const [inputText, setInputText] = useState('');
-  const [topText, setTopTextState] = useState('');
-  const [bottomText, setBottomTextState] = useState('');
-
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
-  const handleTopTextChange = (e) => {
-    setTopTextState(e.target.value);
-  };
-
-  const handleBottomTextChange = (e) => {
-    setBottomTextState(e.target.value);
-  };
-
-  const handleButtonClick = () => {
-    setShowImage(inputText, topText, bottomText);
-  };
-
-  const handleApplyTopText = () => {
-    setShowImage(inputText, topText, bottomText);
-  };
-
-  const handleApplyBottomText = () => {
-    setShowImage(inputText, topText, bottomText);
-  };
-
+const SelectorText = ({ value, onChange }) => {
   return (
-    <div className="actions-container">
-      <TemplateSelector
-        inputText={inputText}
-        handleInputChange={handleInputChange}
-        handleButtonClick={handleButtonClick}
-      />
-      <TextGenerator
-        topText={topText}
-        handleTopTextChange={handleTopTextChange}
-        handleApplyTopText={handleApplyTopText}
-        bottomText={bottomText}
-        handleBottomTextChange={handleBottomTextChange}
-        handleApplyBottomText={handleApplyBottomText}
-      />
+    <input
+      className="selector-text"
+      placeholder="Enter Template ID"
+      value={value}
+      onChange={onChange}
+    />
+  );
+};
+
+const SelectorButton = ({ onClick }) => {
+  return (
+    <button className="selector-button" onClick={onClick}>
+      Show Template
+    </button>
+  );
+};
+
+const TemplateSelector = ({
+  inputText,
+  handleInputChange,
+  handleButtonClick,
+}) => {
+  return (
+    <div className="actions-container-row common-width">
+      <SelectorText value={inputText} onChange={handleInputChange} />
+      <SelectorButton onClick={handleButtonClick} />
     </div>
   );
 };
 
-export default ActionsContainer;
+export default TemplateSelector;
