@@ -5,7 +5,7 @@ const SelectorText = ({ value, onChange }) => {
   return (
     <input
       className="selector-text"
-      placeholder="Search templates"
+      placeholder="Enter Template ID"
       value={value}
       onChange={onChange}
     />
@@ -15,7 +15,7 @@ const SelectorText = ({ value, onChange }) => {
 const SelectorButton = ({ onClick }) => {
   return (
     <button className="selector-button" onClick={onClick}>
-      Search
+      Show Template
     </button>
   );
 };
@@ -26,7 +26,7 @@ const TemplateSelectorRow = ({
   handleButtonClick,
 }) => {
   return (
-    <div className="template-selector-row">
+    <div className="template-selector-row common-width">
       <SelectorText value={inputText} onChange={handleInputChange} />
       <SelectorButton onClick={handleButtonClick} />
     </div>

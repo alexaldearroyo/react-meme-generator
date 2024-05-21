@@ -3,15 +3,15 @@ import React from 'react';
 import MemeDisplay from './MemeDisplay';
 import TemplateSelector from './TemplateSelector';
 
-const Container = ({ setShowImage, showImage, imageUrl, errorMessage }) => {
+const Container = ({ setShowImage, setTopText, setBottomText }) => {
   return (
     <div className="container">
-      <TemplateSelector setShowImage={setShowImage} />
-      <MemeDisplay
-        showImage={showImage}
-        imageUrl={imageUrl}
-        errorMessage={errorMessage}
+      <TemplateSelector
+        setShowImage={setShowImage}
+        setTopText={setTopText}
+        setBottomText={setBottomText}
       />
+      <MemeDisplay />
     </div>
   );
 };

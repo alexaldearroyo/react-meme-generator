@@ -8,3 +8,21 @@
 .bottom-text-container {
   margin: 10px;
 }
+
+.text-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  background-color: #0056b3;
+}
+
+.common-width {
+  width: 100%; /* Ensures both components have the same width */
+}

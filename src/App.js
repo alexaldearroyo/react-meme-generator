@@ -20,10 +20,13 @@ function App() {
       });
   }, []);
 
-  const handleShowImage = (templateName) => {
+  const handleShowImage = (templateName, topText = '_', bottomText = '_') => {
     if (templates.includes(templateName)) {
+      const top = topText.trim() === '' ? '_' : encodeURIComponent(topText);
+      const bottom =
+        bottomText.trim() === '' ? '_' : encodeURIComponent(bottomText);
       setImageUrl(
-        `https://api.memegen.link/images/${String(templateName)}.png`,
+        `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`,
       );
       setShowImage(true);
       setErrorMessage('');
@@ -35,12 +38,15 @@ function App() {
 
   return (
     <div className="App">
-      <Container
-        setShowImage={handleShowImage}
-        showImage={showImage}
-        imageUrl={imageUrl}
-        errorMessage={errorMessage}
-      />
+      <div className="image-container">
+        {showImage && (
+          <img className="meme-image" src={imageUrl} alt={`${imageUrl} meme`} />
+        )}
+        {Boolean(errorMessage) && (
+          <div className="error-message">{errorMessage}</div>
+        )}
+      </div>
+      <Container setShowImage={handleShowImage} />
     </div>
   );
 }

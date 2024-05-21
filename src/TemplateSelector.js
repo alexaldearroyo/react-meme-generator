@@ -5,13 +5,31 @@ import TextGeneratorContainer from './TextGeneratorContainer';
 
 const TemplateSelector = ({ setShowImage }) => {
   const [inputText, setInputText] = useState('');
+  const [topText, setTopTextState] = useState('');
+  const [bottomText, setBottomTextState] = useState('');
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
+  const handleTopTextChange = (e) => {
+    setTopTextState(e.target.value);
+  };
+
+  const handleBottomTextChange = (e) => {
+    setBottomTextState(e.target.value);
+  };
+
   const handleButtonClick = () => {
-    setShowImage(inputText);
+    setShowImage(inputText, topText, bottomText);
+  };
+
+  const handleApplyTopText = () => {
+    setShowImage(inputText, topText, bottomText);
+  };
+
+  const handleApplyBottomText = () => {
+    setShowImage(inputText, topText, bottomText);
   };
 
   return (
@@ -21,7 +39,14 @@ const TemplateSelector = ({ setShowImage }) => {
         handleInputChange={handleInputChange}
         handleButtonClick={handleButtonClick}
       />
-      <TextGeneratorContainer />
+      <TextGeneratorContainer
+        topText={topText}
+        handleTopTextChange={handleTopTextChange}
+        handleApplyTopText={handleApplyTopText}
+        bottomText={bottomText}
+        handleBottomTextChange={handleBottomTextChange}
+        handleApplyBottomText={handleApplyBottomText}
+      />
     </div>
   );
 };
