@@ -40,7 +40,7 @@
   }
 }
 
-.image-container {
+/* .meme-display {
   position: absolute;
   top: 40px;
   left: 50%;
@@ -57,7 +57,7 @@
   color: red;
   font-size: 1.2em;
   margin-top: 20px;
-}
+} */
 
 ----------------------------------------
 
@@ -85,10 +85,13 @@ function App() {
       });
   }, []);
 
-  const handleShowImage = (templateName) => {
+  const handleShowImage = (templateName, topText = '_', bottomText = '_') => {
     if (templates.includes(templateName)) {
+      const top = topText.trim() === '' ? '_' : encodeURIComponent(topText);
+      const bottom =
+        bottomText.trim() === '' ? '_' : encodeURIComponent(bottomText);
       setImageUrl(
-        `https://api.memegen.link/images/${String(templateName)}.png`,
+        `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`,
       );
       setShowImage(true);
       setErrorMessage('');
@@ -100,7 +103,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="image-container">
+      <div className="meme-display">
         {showImage && (
           <img className="meme-image" src={imageUrl} alt={`${imageUrl} meme`} />
         )}
@@ -143,7 +146,7 @@ test('renders learn react link', () => {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.template-selector {
+.actions-container {
   gap: 15px;
 }
 
@@ -154,17 +157,17 @@ test('renders learn react link', () => {
 import './Container.css';
 import React from 'react';
 import MemeDisplay from './MemeDisplay';
-import TemplateSelector from './TemplateSelector';
+import ActionsContainer from './ActionsContainer';
 
-const Container = ({ setShowImage, showImage, imageUrl, errorMessage }) => {
+const Container = ({ setShowImage, setTopText, setBottomText }) => {
   return (
     <div className="container">
-      <TemplateSelector setShowImage={setShowImage} />
-      <MemeDisplay
-        showImage={showImage}
-        imageUrl={imageUrl}
-        errorMessage={errorMessage}
+      <ActionsContainer
+        setShowImage={setShowImage}
+        setTopText={setTopText}
+        setBottomText={setBottomText}
       />
+      <MemeDisplay />
     </div>
   );
 };
@@ -175,7 +178,7 @@ export default Container;
 
 // src/MemeDisplay.css:
 
-.image-container {
+.meme-display {
   position: absolute;
   top: 40px;
   left: 50%;
@@ -189,8 +192,8 @@ export default Container;
 }
 
 .meme-image {
-  width: 100px;
-  height: auto;
+  width: auto;
+  height: 300px;
   border-radius: 10px;
 }
 
@@ -209,7 +212,7 @@ import React from 'react';
 
 const MemeDisplay = ({ showImage, imageUrl, errorMessage }) => {
   return (
-    <div className="image-container">
+    <div className="meme-display">
       {showImage && (
         <img
           className="meme-image"
@@ -228,84 +231,147 @@ export default MemeDisplay;
 
 ----------------------------------------
 
-// src/TemplateSelector.css:
+// src/ActionsContainer.css:
 
-.template-selector {
-  width: 500px;
-  height: 100px;
+.actions-container {
+  width: 80%;
   background-color: lightgrey;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px solid #ccc;
   border-radius: 8px;
-  position: relative;
   padding: 20px;
+  margin: 20px auto;
+  position: relative;
 }
 
-.meme-image {
-  position: fixed;
-  /* top: -100px; Adjust this value as needed */
-  /* left: 50%; */
-  transform: translateX(-50%);
-  width: 300px; /* Adjust the size as needed */
-  height: auto;
+.actions-container-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.selector-text {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 1em;
+}
+
+.selector-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.selector-button:hover {
+  background-color: #0056b3;
+}
+
+.text-generator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.top-text-container,
+.bottom-text-container {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.top-text-container input,
+.bottom-text-container input {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 1em;
+}
+
+.text-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  background-color: #0056b3;
 }
 
 ----------------------------------------
 
-// src/TemplateSelector.js:
+// src/ActionsContainer.js:
 
-import './TemplateSelector.css';
+import './ActionsContainer.css';
 import React, { useState } from 'react';
-import TemplateSelectorRow from './TemplateSelectorRow';
-import TextGeneratorContainer from './TextGeneratorContainer';
+import TemplateSelector from './TemplateSelector';
+import TextGenerator from './TextGenerator';
 
-const TemplateSelector = ({ setShowImage }) => {
+const ActionsContainer = ({ setShowImage }) => {
   const [inputText, setInputText] = useState('');
-  const [topText, setTopText] = useState('');
-  const [bottomText, setBottomText] = useState('');
+  const [topText, setTopTextState] = useState('');
+  const [bottomText, setBottomTextState] = useState('');
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
   const handleTopTextChange = (e) => {
-    setTopText(e.target.value);
+    setTopTextState(e.target.value);
   };
 
   const handleBottomTextChange = (e) => {
-    setBottomText(e.target.value);
+    setBottomTextState(e.target.value);
   };
 
   const handleButtonClick = () => {
     setShowImage(inputText, topText, bottomText);
   };
 
+  const handleApplyTopText = () => {
+    setShowImage(inputText, topText, bottomText);
+  };
+
+  const handleApplyBottomText = () => {
+    setShowImage(inputText, topText, bottomText);
+  };
+
   return (
-    <div className="template-selector">
-      <TemplateSelectorRow
+    <div className="actions-container">
+      <TemplateSelector
         inputText={inputText}
         handleInputChange={handleInputChange}
         handleButtonClick={handleButtonClick}
       />
-      <TextGeneratorContainer
+      <TextGenerator
         topText={topText}
         handleTopTextChange={handleTopTextChange}
+        handleApplyTopText={handleApplyTopText}
         bottomText={bottomText}
         handleBottomTextChange={handleBottomTextChange}
+        handleApplyBottomText={handleApplyBottomText}
       />
     </div>
   );
 };
 
-export default TemplateSelector;
+export default ActionsContainer;
 
 ----------------------------------------
 
-// src/TemplateSelectorRow.css:
+// src/TemplateSelector.css:
 
-.template-selector-row {
+.actions-container-row {
   display: flex;
   gap: 10px; /* Space between input and button */
   margin-bottom: 20px; /* Space below the row */
@@ -315,7 +381,7 @@ export default TemplateSelector;
   width: 100%; /* Ensures both components have the same width */
 }
 
-/* Duplicated in TextGeneratorContainer.css (there as text-button) -> Need to solve */
+/* Duplicated in TextGenerator.css (there as text-button) -> Need to solve */
 .selector-button {
   margin-left: 10px;
   padding: 5px 10px;
@@ -332,9 +398,9 @@ export default TemplateSelector;
 
 ----------------------------------------
 
-// src/TemplateSelectorRow.js:
+// src/TemplateSelector.js:
 
-import './TemplateSelectorRow.css';
+import './TemplateSelector.css';
 import React from 'react';
 
 const SelectorText = ({ value, onChange }) => {
@@ -356,24 +422,24 @@ const SelectorButton = ({ onClick }) => {
   );
 };
 
-const TemplateSelectorRow = ({
+const TemplateSelector = ({
   inputText,
   handleInputChange,
   handleButtonClick,
 }) => {
   return (
-    <div className="template-selector-row common-width">
+    <div className="actions-container-row common-width">
       <SelectorText value={inputText} onChange={handleInputChange} />
       <SelectorButton onClick={handleButtonClick} />
     </div>
   );
 };
 
-export default TemplateSelectorRow;
+export default TemplateSelector;
 
 ----------------------------------------
 
-// src/TextGeneratorContainer.css:
+// src/TextGenerator.css:
 
 .text-generator-container {
   display: flex;
@@ -406,15 +472,19 @@ export default TemplateSelectorRow;
 
 ----------------------------------------
 
-// src/TextGeneratorContainer.js:
+// src/TextGenerator.js:
 
-import './TextGeneratorContainer.css';
+import './TextGenerator.css';
 import React from 'react';
 
-const TopTextContainer = ({ topText, handleTopTextChange, onApplyTopText }) => {
+const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
   return (
     <div className="top-text-container">
-      <input placeholder="Enter top text" />
+      <input
+        placeholder="Enter top text"
+        value={topText}
+        onChange={handleTopTextChange}
+      />
       <button className="text-button" onClick={onApplyTopText}>
         Add
       </button>
@@ -422,10 +492,18 @@ const TopTextContainer = ({ topText, handleTopTextChange, onApplyTopText }) => {
   );
 };
 
-const BottomTextContainer = ({ onApplyBottomText }) => {
+const BottomTextRow = ({
+  bottomText,
+  handleBottomTextChange,
+  onApplyBottomText,
+}) => {
   return (
-    <div className="text-container">
-      <input placeholder="Enter bottom text" />
+    <div className="bottom-text-container">
+      <input
+        placeholder="Enter bottom text"
+        value={bottomText}
+        onChange={handleBottomTextChange}
+      />
       <button className="text-button" onClick={onApplyBottomText}>
         Add
       </button>
@@ -433,24 +511,31 @@ const BottomTextContainer = ({ onApplyBottomText }) => {
   );
 };
 
-const TextGeneratorContainer = () => {
-  const handleApplyTopText = () => {
-    console.log('Top text applied');
-  };
-
-  const handleApplyBottomText = () => {
-    console.log('Bottom text applied');
-  };
-
+const TextGenerator = ({
+  topText,
+  handleTopTextChange,
+  handleApplyTopText,
+  bottomText,
+  handleBottomTextChange,
+  handleApplyBottomText,
+}) => {
   return (
     <div className="text-generator-container common-width">
-      <TopTextContainer onApplyTopText={handleApplyTopText} />
-      <BottomTextContainer onApplyBottomText={handleApplyBottomText} />
+      <TopTextRow
+        topText={topText}
+        handleTopTextChange={handleTopTextChange}
+        onApplyTopText={handleApplyTopText}
+      />
+      <BottomTextRow
+        bottomText={bottomText}
+        handleBottomTextChange={handleBottomTextChange}
+        onApplyBottomText={handleApplyBottomText}
+      />
     </div>
   );
 };
 
-export default TextGeneratorContainer;
+export default TextGenerator;
 
 ----------------------------------------
 
@@ -504,4 +589,3 @@ root.render(
 import '@testing-library/jest-dom';
 
 ----------------------------------------
-

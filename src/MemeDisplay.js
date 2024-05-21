@@ -3,7 +3,7 @@ import React from 'react';
 
 const MemeDisplay = ({ showImage, imageUrl, errorMessage }) => {
   return (
-    <div className="image-container">
+    <div className="meme-display">
       {showImage && (
         <img
           className="meme-image"

@@ -1,9 +1,9 @@
-import './TemplateSelector.css';
+import './ActionsContainer.css';
 import React, { useState } from 'react';
-import TemplateSelectorRow from './TemplateSelectorRow';
-import TextGeneratorContainer from './TextGeneratorContainer';
+import TemplateSelector from './TemplateSelector';
+import TextGenerator from './TextGenerator';
 
-const TemplateSelector = ({ setShowImage }) => {
+const ActionsContainer = ({ setShowImage }) => {
   const [inputText, setInputText] = useState('');
   const [topText, setTopTextState] = useState('');
   const [bottomText, setBottomTextState] = useState('');
@@ -33,13 +33,13 @@ const TemplateSelector = ({ setShowImage }) => {
   };
 
   return (
-    <div className="template-selector">
-      <TemplateSelectorRow
+    <div className="actions-container">
+      <TemplateSelector
         inputText={inputText}
         handleInputChange={handleInputChange}
         handleButtonClick={handleButtonClick}
       />
-      <TextGeneratorContainer
+      <TextGenerator
         topText={topText}
         handleTopTextChange={handleTopTextChange}
         handleApplyTopText={handleApplyTopText}
@@ -51,4 +51,4 @@ const TemplateSelector = ({ setShowImage }) => {
   );
 };
 
-export default TemplateSelector;
+export default ActionsContainer;

@@ -1,7 +1,7 @@
-import './TextGeneratorContainer.css';
+import './TextGenerator.css';
 import React from 'react';
 
-const TopTextContainer = ({ topText, handleTopTextChange, onApplyTopText }) => {
+const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
   return (
     <div className="top-text-container">
       <input
@@ -16,7 +16,7 @@ const TopTextContainer = ({ topText, handleTopTextChange, onApplyTopText }) => {
   );
 };
 
-const BottomTextContainer = ({
+const BottomTextRow = ({
   bottomText,
   handleBottomTextChange,
   onApplyBottomText,
@@ -35,7 +35,7 @@ const BottomTextContainer = ({
   );
 };
 
-const TextGeneratorContainer = ({
+const TextGenerator = ({
   topText,
   handleTopTextChange,
   handleApplyTopText,
@@ -45,12 +45,12 @@ const TextGeneratorContainer = ({
 }) => {
   return (
     <div className="text-generator-container common-width">
-      <TopTextContainer
+      <TopTextRow
         topText={topText}
         handleTopTextChange={handleTopTextChange}
         onApplyTopText={handleApplyTopText}
       />
-      <BottomTextContainer
+      <BottomTextRow
         bottomText={bottomText}
         handleBottomTextChange={handleBottomTextChange}
         onApplyBottomText={handleApplyBottomText}
@@ -59,4 +59,4 @@ const TextGeneratorContainer = ({
   );
 };
 
-export default TextGeneratorContainer;
+export default TextGenerator;

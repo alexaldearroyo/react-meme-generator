@@ -1,4 +1,4 @@
-import './TemplateSelectorRow.css';
+import './TemplateSelector.css';
 import React from 'react';
 
 const SelectorText = ({ value, onChange }) => {
@@ -20,17 +20,17 @@ const SelectorButton = ({ onClick }) => {
   );
 };
 
-const TemplateSelectorRow = ({
+const TemplateSelector = ({
   inputText,
   handleInputChange,
   handleButtonClick,
 }) => {
   return (
-    <div className="template-selector-row common-width">
+    <div className="actions-container-row common-width">
       <SelectorText value={inputText} onChange={handleInputChange} />
       <SelectorButton onClick={handleButtonClick} />
     </div>
   );
 };
 
-export default TemplateSelectorRow;
+export default TemplateSelector;

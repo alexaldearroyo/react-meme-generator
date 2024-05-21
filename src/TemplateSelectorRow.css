@@ -1,4 +1,4 @@
-.template-selector-row {
+.actions-container-row {
   display: flex;
   gap: 10px; /* Space between input and button */
   margin-bottom: 20px; /* Space below the row */
@@ -8,7 +8,7 @@
   width: 100%; /* Ensures both components have the same width */
 }
 
-/* Duplicated in TextGeneratorContainer.css (there as text-button) -> Need to solve */
+/* Duplicated in TextGenerator.css (there as text-button) -> Need to solve */
 .selector-button {
   margin-left: 10px;
   padding: 5px 10px;

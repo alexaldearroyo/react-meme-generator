@@ -1,12 +1,12 @@
 import './Container.css';
 import React from 'react';
+import ActionsContainer from './ActionsContainer';
 import MemeDisplay from './MemeDisplay';
-import TemplateSelector from './TemplateSelector';
 
 const Container = ({ setShowImage, setTopText, setBottomText }) => {
   return (
     <div className="container">
-      <TemplateSelector
+      <ActionsContainer
         setShowImage={setShowImage}
         setTopText={setTopText}
         setBottomText={setBottomText}

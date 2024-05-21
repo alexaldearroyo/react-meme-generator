@@ -1,4 +1,4 @@
-.image-container {
+.meme-display {
   position: absolute;
   top: 40px;
   left: 50%;
@@ -12,8 +12,8 @@
 }
 
 .meme-image {
-  width: 100px;
-  height: auto;
+  width: auto;
+  height: 300px;
   border-radius: 10px;
 }
 

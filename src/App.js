@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="image-container">
+      <div className="meme-display">
         {showImage && (
           <img className="meme-image" src={imageUrl} alt={`${imageUrl} meme`} />
         )}
