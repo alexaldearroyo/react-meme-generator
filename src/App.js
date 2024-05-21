@@ -29,21 +29,18 @@ function App() {
       setErrorMessage('');
     } else {
       setShowImage(false);
-      setErrorMessage('Template name not found');
+      setErrorMessage('Template id not found');
     }
   };
 
   return (
     <div className="App">
-      <div className="image-container">
-        {showImage && (
-          <img className="meme-image" src={imageUrl} alt={`${imageUrl} meme`} />
-        )}
-        {Boolean(errorMessage) && (
-          <div className="error-message">{errorMessage}</div>
-        )}
-      </div>
-      <Container setShowImage={handleShowImage} />
+      <Container
+        setShowImage={handleShowImage}
+        showImage={showImage}
+        imageUrl={imageUrl}
+        errorMessage={errorMessage}
+      />
     </div>
   );
 }

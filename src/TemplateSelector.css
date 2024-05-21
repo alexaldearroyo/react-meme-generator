@@ -8,6 +8,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   position: relative; /* Add this line */
+  padding: 20px;
 }
 
 .meme-image {

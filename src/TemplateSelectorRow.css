@@ -1,0 +1,5 @@
+.template-selector-row {
+  display: flex;
+  gap: 10px; /* Space between input and button */
+  margin-bottom: 20px; /* Space below the row */
+}

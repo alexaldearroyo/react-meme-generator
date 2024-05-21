@@ -1,0 +1,10 @@
+.text-generator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-text-container,
+.bottom-text-container {
+  margin: 10px;
+}
