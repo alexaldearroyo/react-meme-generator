@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
@@ -39,16 +40,43 @@
   }
 }
 
+.image-container {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.meme-image {
+  width: 100px;
+  height: auto;
+}
+
 ----------------------------------------
 
 // src/App.js:
 
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Container from './Container';
 
 function App() {
-  return <Container>{/* <h1>Meme Generator</h1> */}</Container>;
+  const [showImage, setShowImage] = useState(false);
+
+  return (
+    <div className="App">
+      {showImage && (
+        <div className="image-container">
+          <img
+            className="meme-image"
+            src="https://api.memegen.link/images/aag.png"
+            alt="aag meme"
+          />
+        </div>
+      )}
+      <Container setShowImage={setShowImage} />
+    </div>
+  );
 }
 
 export default App;
@@ -93,10 +121,10 @@ import './Container.css';
 import React from 'react';
 import TemplateSelector from './TemplateSelector';
 
-const Container = () => {
+const Container = ({ setShowImage }) => {
   return (
     <div className="container">
-      <TemplateSelector />
+      <TemplateSelector setShowImage={setShowImage} />
     </div>
   );
 };
@@ -116,6 +144,16 @@ export default Container;
   justify-content: center;
   border: 1px solid #ccc;
   border-radius: 8px;
+  position: relative; /* Add this line */
+}
+
+.meme-image {
+  position: fixed;
+  /* top: -100px; Adjust this value as needed */
+  /* left: 50%; */
+  transform: translateX(-50%);
+  width: 300px; /* Adjust the size as needed */
+  height: auto;
 }
 
 ----------------------------------------
@@ -144,9 +182,8 @@ const SelectorButton = ({ onClick }) => {
   );
 };
 
-const TemplateSelector = () => {
+const TemplateSelector = ({ setShowImage }) => {
   const [inputText, setInputText] = useState('');
-  const [showImage, setShowImage] = useState(false);
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
@@ -154,6 +191,7 @@ const TemplateSelector = () => {
 
   const handleButtonClick = () => {
     if (inputText === 'aag') {
+      // Change for any name in API
       setShowImage(true);
     } else {
       setShowImage(false);
@@ -164,9 +202,6 @@ const TemplateSelector = () => {
     <div className="template-selector">
       <SelectorText value={inputText} onChange={handleInputChange} />
       <SelectorButton onClick={handleButtonClick} />
-      {showImage && (
-        <img src="https://api.memegen.link/images/aag.png" alt="aag meme" />
-      )}
     </div>
   );
 };

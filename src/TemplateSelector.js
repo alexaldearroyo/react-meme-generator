@@ -28,12 +28,7 @@ const TemplateSelector = ({ setShowImage }) => {
   };
 
   const handleButtonClick = () => {
-    if (inputText === 'aag') {
-      // Change for any name in API
-      setShowImage(true);
-    } else {
-      setShowImage(false);
-    }
+    setShowImage(inputText);
   };
 
   return (
