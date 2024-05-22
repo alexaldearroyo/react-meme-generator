@@ -1,16 +1,3 @@
-.meme-display {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 200px;
-}
-
 .meme-image {
   width: auto;
   height: 300px;

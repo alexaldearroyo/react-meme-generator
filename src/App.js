@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import Container from './Container';
+import MemeDisplay from './MemeDisplay';
 
 function App() {
   const [showImage, setShowImage] = useState(false);
@@ -38,15 +39,14 @@ function App() {
 
   return (
     <div className="App">
-      <div className="meme-display">
-        {showImage && (
-          <img className="meme-image" src={imageUrl} alt={`${imageUrl} meme`} />
-        )}
-        {Boolean(errorMessage) && (
-          <div className="error-message">{errorMessage}</div>
-        )}
+      <div className="container">
+        <MemeDisplay
+          showImage={showImage}
+          imageUrl={imageUrl}
+          errorMessage={errorMessage}
+        />
+        <Container setShowImage={handleShowImage} />
       </div>
-      <Container setShowImage={handleShowImage} />
     </div>
   );
 }

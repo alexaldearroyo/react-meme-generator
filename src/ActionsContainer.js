@@ -33,7 +33,7 @@ const ActionsContainer = ({ setShowImage }) => {
   };
 
   return (
-    <div className="template-selector">
+    <div className="actions-container">
       <TemplateSelector
         inputText={inputText}
         handleInputChange={handleInputChange}

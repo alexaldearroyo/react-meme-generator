@@ -1,10 +1,5 @@
 .actions-container {
   width: 80%;
-  background-color: lightgrey;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
@@ -12,7 +7,7 @@
   position: relative;
 }
 
-.actions-container-row {
+.template-selector {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
