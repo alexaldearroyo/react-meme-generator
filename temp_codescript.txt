@@ -91,11 +91,9 @@ const ActionsContainer = ({ setShowImage }) => {
   const handleTopTextChange = (e) => {
     setTopTextState(e.target.value);
   };
-
   const handleBottomTextChange = (e) => {
     setBottomTextState(e.target.value);
   };
-
   const handleButtonClick = () => {
     setShowImage(inputText, topText, bottomText);
   };
@@ -321,29 +319,24 @@ export default MemeDisplay;
 
 // src/TemplateSelector.css:
 
+.template-selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.template-label {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .template-selector {
   display: flex;
   gap: 10px; /* Space between input and button */
-  margin-bottom: 20px; /* Space below the row */
-}
-
-.common-width {
-  width: 100%; /* Ensures both components have the same width */
-}
-
-/* Duplicated in TextGenerator.css (there as text-button) -> Need to solve */
-.common-button {
-  margin-left: 10px;
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.text-button:hover {
-  background-color: #0056b3;
+  width: 100%;
 }
 
 ----------------------------------------
@@ -378,9 +371,14 @@ const TemplateSelector = ({
   handleButtonClick,
 }) => {
   return (
-    <div className="template-selector common-width">
-      <SelectorText value={inputText} onChange={handleInputChange} />
-      <SelectorButton onClick={handleButtonClick} />
+    <div className="template-selector-container">
+      <label htmlFor="template-id" className="template-label">
+        Meme template
+      </label>
+      <div className="template-selector common-width">
+        <SelectorText value={inputText} onChange={handleInputChange} />
+        <SelectorButton onClick={handleButtonClick} />
+      </div>
     </div>
   );
 };
@@ -428,6 +426,9 @@ import React from 'react';
 const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
   return (
     <div className="top-text-container">
+      <label htmlFor="top-text" className="top-text-label">
+        Top text
+      </label>
       <input
         placeholder="Enter top text"
         value={topText}
@@ -447,6 +448,9 @@ const BottomTextRow = ({
 }) => {
   return (
     <div className="bottom-text-container">
+      <label htmlFor="bottom-text" className="bottom-text-label">
+        Bottom text
+      </label>
       <input
         placeholder="Enter bottom text"
         value={bottomText}

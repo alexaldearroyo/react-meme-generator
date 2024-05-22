@@ -15,11 +15,9 @@ const ActionsContainer = ({ setShowImage }) => {
   const handleTopTextChange = (e) => {
     setTopTextState(e.target.value);
   };
-
   const handleBottomTextChange = (e) => {
     setBottomTextState(e.target.value);
   };
-
   const handleButtonClick = () => {
     setShowImage(inputText, topText, bottomText);
   };

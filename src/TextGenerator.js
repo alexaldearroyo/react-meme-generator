@@ -4,6 +4,9 @@ import React from 'react';
 const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
   return (
     <div className="top-text-container">
+      <label htmlFor="top-text" className="top-text-label">
+        Top text
+      </label>
       <input
         placeholder="Enter top text"
         value={topText}
@@ -23,6 +26,9 @@ const BottomTextRow = ({
 }) => {
   return (
     <div className="bottom-text-container">
+      <label htmlFor="bottom-text" className="bottom-text-label">
+        Bottom text
+      </label>
       <input
         placeholder="Enter bottom text"
         value={bottomText}

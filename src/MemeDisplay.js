@@ -9,6 +9,7 @@ const MemeDisplay = ({ showImage, imageUrl, errorMessage }) => {
           className="meme-image"
           src={String(imageUrl)}
           alt={`${String(imageUrl)} meme`}
+          data-test-id="meme-image"
         />
       )}
       {Boolean(errorMessage) && (
