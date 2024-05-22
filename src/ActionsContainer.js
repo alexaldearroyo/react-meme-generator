@@ -5,18 +5,18 @@ import TextGenerator from './TextGenerator';
 
 const ActionsContainer = ({ setShowImage }) => {
   const [inputText, setInputText] = useState('');
-  const [topText, setTopTextState] = useState('');
-  const [bottomText, setBottomTextState] = useState('');
+  const [topText, setTopText] = useState('');
+  const [bottomText, setBottomText] = useState('');
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
   const handleTopTextChange = (e) => {
-    setTopTextState(e.target.value);
+    setTopText(e.target.value);
   };
   const handleBottomTextChange = (e) => {
-    setBottomTextState(e.target.value);
+    setBottomText(e.target.value);
   };
   const handleButtonClick = () => {
     setShowImage(inputText, topText, bottomText);
