@@ -32,9 +32,8 @@ function App() {
       const top = topText.trim() === '' ? '_' : encodeURIComponent(topText);
       const bottom =
         bottomText.trim() === '' ? '_' : encodeURIComponent(bottomText);
-      setImageUrl(
-        `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`,
-      );
+      const newImageUrl = `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`;
+      setImageUrl(newImageUrl);
       setShowImage(true);
       setErrorMessage('');
     } else {
@@ -218,6 +217,33 @@ const TextGenerator = ({
 };
 
 export default TextGenerator;
+
+----------------------------------------
+
+// src/MemeDisplay.js:
+
+import './MemeDisplay.css';
+import React from 'react';
+
+const MemeDisplay = ({ showImage, imageUrl, errorMessage }) => {
+  return (
+    <div className="meme-display">
+      {showImage && (
+        <img
+          className="meme-image"
+          src={String(imageUrl)}
+          alt={`${String(imageUrl)} meme`}
+          data-test-id="meme-image"
+        />
+      )}
+      {Boolean(errorMessage) && (
+        <div className="error-message">{errorMessage}</div>
+      )}
+    </div>
+  );
+};
+
+export default MemeDisplay;
 
 ----------------------------------------
 
