@@ -202,11 +202,10 @@ export default ActionsContainer;
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import ActionsContainer from './ActionsContainer';
-import Container from './Container';
 import MemeDisplay from './MemeDisplay';
 
 function App() {
-  const [showImage, setShowImage] = useState(false);
+  const [showImage, setShowImage] = useState(true);
   const [imageUrl, setImageUrl] = useState(
     'https://api.memegen.link/images/doge/Hello/World.png',
   );
@@ -270,38 +269,6 @@ test('renders learn react link', () => {
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
-
-----------------------------------------
-
-// src/Container.css:
-
-.actions-container {
-  gap: 15px;
-}
-
-----------------------------------------
-
-// src/Container.js:
-
-import './Container.css';
-import React from 'react';
-import ActionsContainer from './ActionsContainer';
-import MemeDisplay from './MemeDisplay';
-
-const Container = ({ setShowImage, setTopText, setBottomText }) => {
-  return (
-    <div className="container">
-      <ActionsContainer
-        setShowImage={setShowImage}
-        setTopText={setTopText}
-        setBottomText={setBottomText}
-      />
-      <MemeDisplay />
-    </div>
-  );
-};
-
-export default Container;
 
 ----------------------------------------
 
@@ -456,7 +423,7 @@ export default TemplateSelector;
 import './TextGenerator.css';
 import React from 'react';
 
-const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
+const TopTextRow = ({ topText, handleTopTextChange }) => {
   return (
     <div className="top-text-container">
       <label htmlFor="top-text" className="top-text-label">
@@ -467,18 +434,11 @@ const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
         value={topText}
         onChange={handleTopTextChange}
       />
-      <button className="text-button" onClick={onApplyTopText}>
-        Add
-      </button>
     </div>
   );
 };
 
-const BottomTextRow = ({
-  bottomText,
-  handleBottomTextChange,
-  onApplyBottomText,
-}) => {
+const BottomTextRow = ({ bottomText, handleBottomTextChange }) => {
   return (
     <div className="bottom-text-container">
       <label htmlFor="bottom-text" className="bottom-text-label">
@@ -489,9 +449,6 @@ const BottomTextRow = ({
         value={bottomText}
         onChange={handleBottomTextChange}
       />
-      <button className="text-button" onClick={onApplyBottomText}>
-        Add
-      </button>
     </div>
   );
 };
@@ -499,28 +456,25 @@ const BottomTextRow = ({
 const TextGenerator = ({
   topText,
   handleTopTextChange,
-  handleApplyTopText,
   bottomText,
   handleBottomTextChange,
-  handleApplyBottomText,
   handleGenerateClick,
   handleDownloadClick,
   imageUrl,
 }) => {
   return (
     <div className="text-generator-container common-width">
-      <TopTextRow
-        topText={topText}
-        handleTopTextChange={handleTopTextChange}
-        onApplyTopText={handleApplyTopText}
-      />
+      <TopTextRow topText={topText} handleTopTextChange={handleTopTextChange} />
       <BottomTextRow
         bottomText={bottomText}
         handleBottomTextChange={handleBottomTextChange}
-        onApplyBottomText={handleApplyBottomText}
       />
       <div className="button-container">
-        <button className="text-button" onClick={handleGenerateClick}>
+        <button
+          className="text-button"
+          onClick={handleGenerateClick}
+          data-test-id="generate-meme"
+        >
           Generate
         </button>
         <button

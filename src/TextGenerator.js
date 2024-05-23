@@ -10,6 +10,7 @@ const TopTextRow = ({ topText, handleTopTextChange }) => {
         Top text
       </label>
       <input
+        id="top-text"
         placeholder="Enter top text"
         value={topText}
         onChange={handleTopTextChange}
@@ -25,6 +26,7 @@ const BottomTextRow = ({ bottomText, handleBottomTextChange }) => {
         Bottom text
       </label>
       <input
+        id="bottom-text"
         placeholder="Enter bottom text"
         value={bottomText}
         onChange={handleBottomTextChange}
