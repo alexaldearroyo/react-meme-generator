@@ -1,13 +1,15 @@
+// src/App.js:
+
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import Container from './Container';
+import ActionsContainer from './ActionsContainer';
 import MemeDisplay from './MemeDisplay';
 
 function App() {
   const [showImage, setShowImage] = useState(true);
   const [imageUrl, setImageUrl] = useState(
     'https://api.memegen.link/images/doge/Hello/World.png',
-  ); // URL de ejemplo
+  );
   const [errorMessage, setErrorMessage] = useState('');
   const [templates, setTemplates] = useState([]);
 
@@ -47,7 +49,7 @@ function App() {
           imageUrl={imageUrl}
           errorMessage={errorMessage}
         />
-        <Container setShowImage={handleShowImage} />
+        <ActionsContainer setShowImage={handleShowImage} imageUrl={imageUrl} />
       </div>
     </div>
   );

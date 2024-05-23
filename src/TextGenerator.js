@@ -1,3 +1,5 @@
+// src/TextGenerator.js
+
 import './TextGenerator.css';
 import React from 'react';
 
@@ -37,6 +39,8 @@ const TextGenerator = ({
   bottomText,
   handleBottomTextChange,
   handleGenerateClick,
+  handleDownloadClick,
+  imageUrl,
 }) => {
   return (
     <div className="text-generator-container common-width">
@@ -45,9 +49,21 @@ const TextGenerator = ({
         bottomText={bottomText}
         handleBottomTextChange={handleBottomTextChange}
       />
-      <button className="text-button" onClick={handleGenerateClick}>
-        Generate
-      </button>
+      <div className="button-container">
+        <button
+          className="text-button"
+          onClick={handleGenerateClick}
+          data-test-id="generate-meme"
+        >
+          Generate
+        </button>
+        <button
+          className="text-button"
+          onClick={() => handleDownloadClick(imageUrl)}
+        >
+          Download
+        </button>
+      </div>
     </div>
   );
 };
