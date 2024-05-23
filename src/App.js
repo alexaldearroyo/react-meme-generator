@@ -1,5 +1,3 @@
-// src/App.js:
-
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import ActionsContainer from './ActionsContainer';
