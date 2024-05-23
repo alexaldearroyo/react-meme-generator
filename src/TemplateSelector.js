@@ -12,19 +12,7 @@ const SelectorText = ({ value, onChange }) => {
   );
 };
 
-const SelectorButton = ({ onClick }) => {
-  return (
-    <button className="selector-button" onClick={onClick}>
-      Show Template
-    </button>
-  );
-};
-
-const TemplateSelector = ({
-  inputText,
-  handleInputChange,
-  handleButtonClick,
-}) => {
+const TemplateSelector = ({ inputText, handleInputChange }) => {
   return (
     <div className="template-selector-container">
       <label htmlFor="template-id" className="template-label">
@@ -32,7 +20,6 @@ const TemplateSelector = ({
       </label>
       <div className="template-selector common-width">
         <SelectorText value={inputText} onChange={handleInputChange} />
-        <SelectorButton onClick={handleButtonClick} />
       </div>
     </div>
   );
