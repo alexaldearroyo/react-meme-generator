@@ -30,8 +30,9 @@ function App() {
       const top = topText.trim() === '' ? '_' : encodeURIComponent(topText);
       const bottom =
         bottomText.trim() === '' ? '_' : encodeURIComponent(bottomText);
-      const newImageUrl = `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`;
-      setImageUrl(newImageUrl);
+      setImageUrl(
+        `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`,
+      );
       setShowImage(true);
       setErrorMessage('');
     } else {

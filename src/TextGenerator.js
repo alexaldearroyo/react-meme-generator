@@ -26,7 +26,6 @@ const BottomTextRow = ({ bottomText, handleBottomTextChange }) => {
         Bottom text
       </label>
       <input
-        id="bottom-text"
         placeholder="Enter bottom text"
         value={bottomText}
         onChange={handleBottomTextChange}

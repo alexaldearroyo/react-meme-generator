@@ -1,5 +1,7 @@
+// src/ActionsContainer.js
+
 import './ActionsContainer.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TemplateSelector from './TemplateSelector';
 import TextGenerator from './TextGenerator';
 
@@ -20,9 +22,9 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
     setBottomText(e.target.value);
   };
 
-  useEffect(() => {
+  const handleButtonClick = () => {
     setShowImage(inputText, topText, bottomText);
-  }, [inputText, topText, bottomText, setShowImage]);
+  };
 
   const handleDownloadClick = async () => {
     if (!imageUrl) return;
@@ -57,13 +59,14 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
       <TemplateSelector
         inputText={inputText}
         handleInputChange={handleInputChange}
+        handleButtonClick={handleButtonClick}
       />
       <TextGenerator
         topText={topText}
         handleTopTextChange={handleTopTextChange}
         bottomText={bottomText}
         handleBottomTextChange={handleBottomTextChange}
-        handleGenerateClick={() => setShowImage(inputText, topText, bottomText)}
+        handleGenerateClick={handleButtonClick}
         handleDownloadClick={handleDownloadClick}
         imageUrl={imageUrl}
       />
