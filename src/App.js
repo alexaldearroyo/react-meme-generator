@@ -4,8 +4,10 @@ import Container from './Container';
 import MemeDisplay from './MemeDisplay';
 
 function App() {
-  const [showImage, setShowImage] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
+  const [showImage, setShowImage] = useState(true);
+  const [imageUrl, setImageUrl] = useState(
+    'https://api.memegen.link/images/doge/Hello/World.png',
+  ); // URL de ejemplo
   const [errorMessage, setErrorMessage] = useState('');
   const [templates, setTemplates] = useState([]);
 

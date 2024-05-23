@@ -15,18 +15,12 @@ const ActionsContainer = ({ setShowImage }) => {
   const handleTopTextChange = (e) => {
     setTopText(e.target.value);
   };
+
   const handleBottomTextChange = (e) => {
     setBottomText(e.target.value);
   };
+
   const handleButtonClick = () => {
-    setShowImage(inputText, topText, bottomText);
-  };
-
-  const handleApplyTopText = () => {
-    setShowImage(inputText, topText, bottomText);
-  };
-
-  const handleApplyBottomText = () => {
     setShowImage(inputText, topText, bottomText);
   };
 
@@ -40,10 +34,9 @@ const ActionsContainer = ({ setShowImage }) => {
       <TextGenerator
         topText={topText}
         handleTopTextChange={handleTopTextChange}
-        handleApplyTopText={handleApplyTopText}
         bottomText={bottomText}
         handleBottomTextChange={handleBottomTextChange}
-        handleApplyBottomText={handleApplyBottomText}
+        handleGenerateClick={handleButtonClick}
       />
     </div>
   );

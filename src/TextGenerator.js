@@ -1,7 +1,7 @@
 import './TextGenerator.css';
 import React from 'react';
 
-const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
+const TopTextRow = ({ topText, handleTopTextChange }) => {
   return (
     <div className="top-text-container">
       <label htmlFor="top-text" className="top-text-label">
@@ -12,18 +12,11 @@ const TopTextRow = ({ topText, handleTopTextChange, onApplyTopText }) => {
         value={topText}
         onChange={handleTopTextChange}
       />
-      <button className="text-button" onClick={onApplyTopText}>
-        Add
-      </button>
     </div>
   );
 };
 
-const BottomTextRow = ({
-  bottomText,
-  handleBottomTextChange,
-  onApplyBottomText,
-}) => {
+const BottomTextRow = ({ bottomText, handleBottomTextChange }) => {
   return (
     <div className="bottom-text-container">
       <label htmlFor="bottom-text" className="bottom-text-label">
@@ -34,9 +27,6 @@ const BottomTextRow = ({
         value={bottomText}
         onChange={handleBottomTextChange}
       />
-      <button className="text-button" onClick={onApplyBottomText}>
-        Add
-      </button>
     </div>
   );
 };
@@ -44,23 +34,20 @@ const BottomTextRow = ({
 const TextGenerator = ({
   topText,
   handleTopTextChange,
-  handleApplyTopText,
   bottomText,
   handleBottomTextChange,
-  handleApplyBottomText,
+  handleGenerateClick,
 }) => {
   return (
     <div className="text-generator-container common-width">
-      <TopTextRow
-        topText={topText}
-        handleTopTextChange={handleTopTextChange}
-        onApplyTopText={handleApplyTopText}
-      />
+      <TopTextRow topText={topText} handleTopTextChange={handleTopTextChange} />
       <BottomTextRow
         bottomText={bottomText}
         handleBottomTextChange={handleBottomTextChange}
-        onApplyBottomText={handleApplyBottomText}
       />
+      <button className="text-button" onClick={handleGenerateClick}>
+        Generate
+      </button>
     </div>
   );
 };
