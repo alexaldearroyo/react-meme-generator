@@ -25,17 +25,10 @@ function App() {
       });
   }, []);
 
-  // URL Text Encoding
-  const encodeText = (text) => {
-    return text.trim() === ''
-      ? '_'
-      : encodeURIComponent(text).replace(/%20/g, '_');
-  };
-
   // Show Meme Image
-  const handleShowImage = (templateName, topText = '_', bottomText = '_') => {
+  const handleShowImage = (templateName, topText, bottomText) => {
     if (templates.includes(templateName)) {
-      const newImageUrl = `https://api.memegen.link/images/${templateName}/${encodeText(topText)}/${encodeText(bottomText)}.png`;
+      const newImageUrl = `https://api.memegen.link/images/${templateName}/${topText}/${bottomText}.png`; // URL interpolation
       setImageUrl(newImageUrl);
       setShowImage(true);
       setErrorMessage('');

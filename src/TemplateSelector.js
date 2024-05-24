@@ -12,7 +12,6 @@ const SelectorText = ({ value, onChange }) => {
   );
 };
 
-// CAN ELIMINATE THS?
 const SelectorButton = ({ onClick }) => {
   return (
     <button className="selector-button" onClick={onClick}>
