@@ -4,6 +4,7 @@ import ActionsContainer from './ActionsContainer';
 import MemeDisplay from './MemeDisplay';
 
 function App() {
+  // Component States
   const [showImage, setShowImage] = useState(true);
   const [imageUrl, setImageUrl] = useState(
     'https://api.memegen.link/images/doge/Hello/World.png',
@@ -11,6 +12,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [templates, setTemplates] = useState([]);
 
+  // Effect for fetching meme templates
   useEffect(() => {
     fetch('https://api.memegen.link/templates/')
       .then((response) => response.json())
@@ -23,17 +25,17 @@ function App() {
       });
   }, []);
 
+  // URL Text Encoding
+  const encodeText = (text) => {
+    return text.trim() === ''
+      ? '_'
+      : encodeURIComponent(text).replace(/%20/g, '_');
+  };
+
+  // Show Meme Image
   const handleShowImage = (templateName, topText = '_', bottomText = '_') => {
     if (templates.includes(templateName)) {
-      const top =
-        topText.trim() === ''
-          ? '_'
-          : encodeURIComponent(topText).replace(/%20/g, '_');
-      const bottom =
-        bottomText.trim() === ''
-          ? '_'
-          : encodeURIComponent(bottomText).replace(/%20/g, '_');
-      const newImageUrl = `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`;
+      const newImageUrl = `https://api.memegen.link/images/${templateName}/${encodeText(topText)}/${encodeText(bottomText)}.png`;
       setImageUrl(newImageUrl);
       setShowImage(true);
       setErrorMessage('');

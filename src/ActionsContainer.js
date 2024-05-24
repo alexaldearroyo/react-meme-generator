@@ -8,22 +8,6 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   const [topText, setTopText] = useState('Hello');
   const [bottomText, setBottomText] = useState('World');
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
-  const handleTopTextChange = (e) => {
-    setTopText(e.target.value);
-  };
-
-  const handleBottomTextChange = (e) => {
-    setBottomText(e.target.value);
-  };
-
-  // useEffect(() => {
-  //   setShowImage('doge', 'Hello', 'World');
-  // }, [setShowImage]);
-
   useEffect(() => {
     setShowImage(inputText, topText, bottomText);
   }, [inputText, topText, bottomText, setShowImage]);
@@ -48,7 +32,6 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
       document.body.appendChild(link);
       link.click();
 
-      // Revoke the temporary URL after download to avoid memory leaks
       window.URL.revokeObjectURL(url);
       document.body.removeChild(link);
     } catch (error) {
@@ -60,13 +43,13 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
     <div className="actions-container">
       <TemplateSelector
         inputText={inputText}
-        handleInputChange={handleInputChange}
+        handleInputChange={(e) => setInputText(e.target.value)}
       />
       <TextGenerator
         topText={topText}
-        handleTopTextChange={handleTopTextChange}
+        handleTopTextChange={(e) => setTopText(e.target.value)}
         bottomText={bottomText}
-        handleBottomTextChange={handleBottomTextChange}
+        handleBottomTextChange={(e) => setBottomText(e.target.value)}
         handleGenerateClick={() => setShowImage(inputText, topText, bottomText)}
         handleDownloadClick={handleDownloadClick}
         imageUrl={imageUrl}
