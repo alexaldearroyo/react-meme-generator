@@ -25,9 +25,14 @@ function App() {
 
   const handleShowImage = (templateName, topText = '_', bottomText = '_') => {
     if (templates.includes(templateName)) {
-      const top = topText.trim() === '' ? '_' : encodeURIComponent(topText);
+      const top =
+        topText.trim() === ''
+          ? '_'
+          : encodeURIComponent(topText).replace(/%20/g, '_');
       const bottom =
-        bottomText.trim() === '' ? '_' : encodeURIComponent(bottomText);
+        bottomText.trim() === ''
+          ? '_'
+          : encodeURIComponent(bottomText).replace(/%20/g, '_');
       const newImageUrl = `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`;
       setImageUrl(newImageUrl);
       setShowImage(true);
