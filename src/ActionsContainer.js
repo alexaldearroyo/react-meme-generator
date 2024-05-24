@@ -20,9 +20,9 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
     setBottomText(e.target.value);
   };
 
-  useEffect(() => {
-    setShowImage('doge', 'Hello', 'World');
-  }, [setShowImage]);
+  // useEffect(() => {
+  //   setShowImage('doge', 'Hello', 'World');
+  // }, [setShowImage]);
 
   useEffect(() => {
     setShowImage(inputText, topText, bottomText);
