@@ -9,7 +9,9 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   const [bottomText, setBottomText] = useState('World');
 
   useEffect(() => {
-    setShowImage(inputText, topText, bottomText);
+    const encodedTopText = encodeURIComponent(topText);
+    const encodedBottomText = encodeURIComponent(bottomText);
+    setShowImage(inputText, encodedTopText, encodedBottomText);
   }, [inputText, topText, bottomText, setShowImage]);
 
   const handleDownloadClick = async () => {

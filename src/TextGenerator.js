@@ -24,16 +24,8 @@ const TextGenerator = ({
   handleBottomTextChange,
   handleGenerateClick,
   handleDownloadClick,
-  imageUrl,
+  // imageUrl,
 }) => {
-  const encodedTopText = encodeURIComponent(topText);
-  const encodedBottomText = encodeURIComponent(bottomText);
-
-  const inputText = '';
-  const handleGenerateClickEncoded = () => {
-    handleGenerateClick(inputText, encodedTopText, encodedBottomText);
-  };
-
   return (
     <div className="text-generator-container common-width">
       <TextRow
@@ -49,13 +41,10 @@ const TextGenerator = ({
         handleChange={handleBottomTextChange}
       />
       <div className="button-container">
-        <button className="text-button" onClick={handleGenerateClickEncoded}>
+        <button className="text-button" onClick={handleGenerateClick}>
           Generate
         </button>
-        <button
-          className="text-button"
-          onClick={() => handleDownloadClick(imageUrl)}
-        >
+        <button className="text-button" onClick={handleDownloadClick}>
           Download
         </button>
       </div>
