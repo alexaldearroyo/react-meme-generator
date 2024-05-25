@@ -8,21 +8,8 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   const [topText, setTopText] = useState('Hello');
   const [bottomText, setBottomText] = useState('World');
 
-  const handleTopTextChange = (e) => {
-    const newText = e.target.value;
-    const encodedText = encodeURIComponent(newText);
-    setTopText(encodedText);
-  };
-  const handleBottomTextChange = (e) => {
-    const newText = e.target.value;
-    const encodedText = encodeURIComponent(newText);
-    setBottomText(encodedText);
-  };
-
   useEffect(() => {
-    const encodedTopText = encodeURIComponent(topText);
-    const encodedBottomText = encodeURIComponent(bottomText);
-    setShowImage(inputText, encodedTopText, encodedBottomText);
+    setShowImage(inputText, topText, bottomText);
   }, [inputText, topText, bottomText, setShowImage]);
 
   const handleDownloadClick = async () => {
@@ -60,9 +47,9 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
       />
       <TextGenerator
         topText={topText}
-        handleTopTextChange={handleTopTextChange}
+        handleTopTextChange={(e) => setTopText(e.target.value)}
         bottomText={bottomText}
-        handleBottomTextChange={handleBottomTextChange}
+        handleBottomTextChange={(e) => setBottomText(e.target.value)}
         handleGenerateClick={() => setShowImage(inputText, topText, bottomText)}
         handleDownloadClick={handleDownloadClick}
         imageUrl={imageUrl}
