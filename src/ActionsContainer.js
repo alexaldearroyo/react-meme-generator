@@ -8,6 +8,17 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   const [topText, setTopText] = useState('Hello');
   const [bottomText, setBottomText] = useState('World');
 
+  const handleTopTextChange = (e) => {
+    const newText = e.target.value;
+    const encodedText = encodeURIComponent(newText);
+    setTopText(encodedText);
+  };
+  const handleBottomTextChange = (e) => {
+    const newText = e.target.value;
+    const encodedText = encodeURIComponent(newText);
+    setBottomText(encodedText);
+  };
+
   useEffect(() => {
     const encodedTopText = encodeURIComponent(topText);
     const encodedBottomText = encodeURIComponent(bottomText);
@@ -49,9 +60,9 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
       />
       <TextGenerator
         topText={topText}
-        handleTopTextChange={(e) => setTopText(e.target.value)}
+        handleTopTextChange={handleTopTextChange}
         bottomText={bottomText}
-        handleBottomTextChange={(e) => setBottomText(e.target.value)}
+        handleBottomTextChange={handleBottomTextChange}
         handleGenerateClick={() => setShowImage(inputText, topText, bottomText)}
         handleDownloadClick={handleDownloadClick}
         imageUrl={imageUrl}
