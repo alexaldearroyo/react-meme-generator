@@ -1,3 +1,5 @@
+// src/TextGenerator.js
+
 import './TextGenerator.css';
 import React from 'react';
 
@@ -23,36 +25,42 @@ const TextGenerator = ({
   handleGenerateClick,
   handleDownloadClick,
   imageUrl,
-}) => (
-  <div className="text-generator-container common-width">
-    <TextRow
-      label="Top text"
-      id="top-text"
-      value={topText}
-      handleChange={handleTopTextChange}
-    />
-    <TextRow
-      label="Bottom text"
-      id="bottom-text"
-      value={bottomText}
-      handleChange={handleBottomTextChange}
-    />
-    <div className="button-container">
-      <button
-        className="text-button"
-        onClick={handleGenerateClick}
-        data-test-id="generate-meme"
-      >
-        Generate
-      </button>
-      <button
-        className="text-button"
-        onClick={() => handleDownloadClick(imageUrl)}
-      >
-        Download
-      </button>
+}) => {
+  const encodedTopText = encodeURIComponent(topText);
+  const encodedBottomText = encodeURIComponent(bottomText);
+
+  const inputText = '';
+  const handleGenerateClickEncoded = () => {
+    handleGenerateClick(inputText, encodedTopText, encodedBottomText);
+  };
+
+  return (
+    <div className="text-generator-container common-width">
+      <TextRow
+        label="Top text"
+        id="top-text"
+        value={topText}
+        handleChange={handleTopTextChange}
+      />
+      <TextRow
+        label="Bottom text"
+        id="bottom-text"
+        value={bottomText}
+        handleChange={handleBottomTextChange}
+      />
+      <div className="button-container">
+        <button className="text-button" onClick={handleGenerateClickEncoded}>
+          Generate
+        </button>
+        <button
+          className="text-button"
+          onClick={() => handleDownloadClick(imageUrl)}
+        >
+          Download
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default TextGenerator;

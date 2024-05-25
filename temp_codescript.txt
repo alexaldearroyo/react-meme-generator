@@ -6,6 +6,7 @@ import ActionsContainer from './ActionsContainer';
 import MemeDisplay from './MemeDisplay';
 
 function App() {
+  // Component States
   const [showImage, setShowImage] = useState(true);
   const [imageUrl, setImageUrl] = useState(
     'https://api.memegen.link/images/doge/Hello/World.png',
@@ -13,6 +14,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [templates, setTemplates] = useState([]);
 
+  // Effect for fetching meme templates
   useEffect(() => {
     fetch('https://api.memegen.link/templates/')
       .then((response) => response.json())
@@ -25,12 +27,10 @@ function App() {
       });
   }, []);
 
-  const handleShowImage = (templateName, topText = '_', bottomText = '_') => {
+  // Show Meme Image
+  const handleShowImage = (templateName, topText, bottomText) => {
     if (templates.includes(templateName)) {
-      const top = topText.trim() === '' ? '_' : encodeURIComponent(topText);
-      const bottom =
-        bottomText.trim() === '' ? '_' : encodeURIComponent(bottomText);
-      const newImageUrl = `https://api.memegen.link/images/${String(templateName)}/${String(top)}/${String(bottom)}.png`;
+      const newImageUrl = `https://api.memegen.link/images/${templateName}/${topText}/${bottomText}.png`; // URL interpolation
       setImageUrl(newImageUrl);
       setShowImage(true);
       setErrorMessage('');
@@ -70,22 +70,6 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   const [topText, setTopText] = useState('Hello');
   const [bottomText, setBottomText] = useState('World');
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
-  const handleTopTextChange = (e) => {
-    setTopText(e.target.value);
-  };
-
-  const handleBottomTextChange = (e) => {
-    setBottomText(e.target.value);
-  };
-
-  // useEffect(() => {
-  //   setShowImage('doge', 'Hello', 'World');
-  // }, [setShowImage]);
-
   useEffect(() => {
     setShowImage(inputText, topText, bottomText);
   }, [inputText, topText, bottomText, setShowImage]);
@@ -110,7 +94,6 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
       document.body.appendChild(link);
       link.click();
 
-      // Revoke the temporary URL after download to avoid memory leaks
       window.URL.revokeObjectURL(url);
       document.body.removeChild(link);
     } catch (error) {
@@ -122,13 +105,13 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
     <div className="actions-container">
       <TemplateSelector
         inputText={inputText}
-        handleInputChange={handleInputChange}
+        handleInputChange={(e) => setInputText(e.target.value)}
       />
       <TextGenerator
         topText={topText}
-        handleTopTextChange={handleTopTextChange}
+        handleTopTextChange={(e) => setTopText(e.target.value)}
         bottomText={bottomText}
-        handleBottomTextChange={handleBottomTextChange}
+        handleBottomTextChange={(e) => setBottomText(e.target.value)}
         handleGenerateClick={() => setShowImage(inputText, topText, bottomText)}
         handleDownloadClick={handleDownloadClick}
         imageUrl={imageUrl}
@@ -148,72 +131,55 @@ export default ActionsContainer;
 import './TextGenerator.css';
 import React from 'react';
 
-const TopTextRow = ({ topText, handleTopTextChange }) => {
-  return (
-    <div className="top-text-container">
-      <label htmlFor="top-text" className="top-text-label">
-        Top text
-      </label>
-      <input
-        id="top-text"
-        placeholder="Enter top text"
-        value={topText}
-        onChange={handleTopTextChange}
-      />
-    </div>
-  );
-};
-
-const BottomTextRow = ({ bottomText, handleBottomTextChange }) => {
-  return (
-    <div className="bottom-text-container">
-      <label htmlFor="bottom-text" className="bottom-text-label">
-        Bottom text
-      </label>
-      <input
-        id="bottom-text"
-        placeholder="Enter bottom text"
-        value={bottomText}
-        onChange={handleBottomTextChange}
-      />
-    </div>
-  );
-};
+const TextRow = ({ label, id, value, handleChange }) => (
+  <div className={`${id}-container`}>
+    <label htmlFor={id} className={`${id}-label`}>
+      {label}
+    </label>
+    <input
+      id={id}
+      placeholder={`Enter ${label.toLowerCase()}`}
+      value={value}
+      onChange={handleChange}
+    />
+  </div>
+);
 
 const TextGenerator = ({
   topText,
   handleTopTextChange,
   bottomText,
   handleBottomTextChange,
-  handleGenerateClick,
+  handleGenerateClick, // Receive setShowImage as a prop
   handleDownloadClick,
   imageUrl,
-}) => {
-  return (
-    <div className="text-generator-container common-width">
-      <TopTextRow topText={topText} handleTopTextChange={handleTopTextChange} />
-      <BottomTextRow
-        bottomText={bottomText}
-        handleBottomTextChange={handleBottomTextChange}
-      />
-      <div className="button-container">
-        <button
-          className="text-button"
-          onClick={handleGenerateClick}
-          data-test-id="generate-meme"
-        >
-          Generate
-        </button>
-        <button
-          className="text-button"
-          onClick={() => handleDownloadClick(imageUrl)}
-        >
-          Download
-        </button>
-      </div>
+}) => (
+  <div className="text-generator-container common-width">
+    <TextRow
+      label="Top text"
+      id="top-text"
+      value={topText}
+      handleChange={handleTopTextChange}
+    />
+    <TextRow
+      label="Bottom text"
+      id="bottom-text"
+      value={bottomText}
+      handleChange={handleBottomTextChange}
+    />
+    <div className="button-container">
+      <button className="text-button" onClick={handleGenerateClick}>
+        Generate
+      </button>
+      <button
+        className="text-button"
+        onClick={() => handleDownloadClick(imageUrl)}
+      >
+        Download
+      </button>
     </div>
-  );
-};
+  </div>
+);
 
 export default TextGenerator;
 
@@ -224,23 +190,21 @@ export default TextGenerator;
 import './MemeDisplay.css';
 import React from 'react';
 
-const MemeDisplay = ({ showImage, imageUrl, errorMessage }) => {
-  return (
-    <div className="meme-display">
-      {showImage && (
-        <img
-          className="meme-image"
-          src={String(imageUrl)}
-          alt={`${String(imageUrl)} meme`}
-          data-test-id="meme-image"
-        />
-      )}
-      {Boolean(errorMessage) && (
-        <div className="error-message">{errorMessage}</div>
-      )}
-    </div>
-  );
-};
+const MemeDisplay = ({ showImage, imageUrl, errorMessage }) => (
+  <div className="meme-display">
+    {showImage && (
+      <img
+        className="meme-image"
+        src={String(imageUrl)}
+        alt={`${String(imageUrl)} meme`}
+        data-test-id="meme-image"
+      />
+    )}
+    {Boolean(errorMessage) && (
+      <div className="error-message">{errorMessage}</div>
+    )}
+  </div>
+);
 
 export default MemeDisplay;
 
@@ -262,7 +226,6 @@ const SelectorText = ({ value, onChange }) => {
   );
 };
 
-// CAN ELIMINATE THS?
 const SelectorButton = ({ onClick }) => {
   return (
     <button className="selector-button" onClick={onClick}>
