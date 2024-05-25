@@ -47,11 +47,7 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
 
   return (
     <div className="actions-container">
-      <TemplateSelector
-        inputText={inputText}
-        handleInputChange={(e) => setInputText(e.target.value)}
-        handleButtonClick={handleButtonClick}
-      />
+      <TemplateSelector handleButtonClick={(text) => setInputText(text)} />
       <TextGenerator
         topText={topText}
         handleTopTextChange={(e) => setTopText(e.target.value)}
