@@ -39,18 +39,25 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
     }
   };
 
+  const handleButtonClick = () => {
+    const encodedTopText = encodeURIComponent(topText);
+    const encodedBottomText = encodeURIComponent(bottomText);
+    setShowImage(inputText, encodedTopText, encodedBottomText);
+  };
+
   return (
     <div className="actions-container">
       <TemplateSelector
         inputText={inputText}
         handleInputChange={(e) => setInputText(e.target.value)}
+        handleButtonClick={handleButtonClick}
       />
       <TextGenerator
         topText={topText}
         handleTopTextChange={(e) => setTopText(e.target.value)}
         bottomText={bottomText}
         handleBottomTextChange={(e) => setBottomText(e.target.value)}
-        handleGenerateClick={() => setShowImage(inputText, topText, bottomText)}
+        handleGenerateClick={handleButtonClick}
         handleDownloadClick={handleDownloadClick}
         imageUrl={imageUrl}
       />
