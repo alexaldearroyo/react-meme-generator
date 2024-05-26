@@ -1,22 +1,6 @@
 import './TemplateSelector.css';
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown }) => (
-  <input
-    className="selector-text"
-    placeholder="Enter Template ID"
-    value={value}
-    onChange={onChange}
-    onKeyDown={onKeyDown}
-  />
-);
-
-const SelectorButton = ({ onClick }) => (
-  <button className="selector-button" onClick={onClick}>
-    Show Template
-  </button>
-);
-
 const TemplateSelector = ({ handleButtonClick }) => {
   const [inputText, setInputText] = useState('');
 
@@ -35,12 +19,19 @@ const TemplateSelector = ({ handleButtonClick }) => {
       <label htmlFor="template-id" className="template-label">
         Meme template
         <div className="template-selector common-width">
-          <SelectorText
+          <input
+            className="selector-text"
+            placeholder="Enter Template ID"
             value={inputText}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
           />
-          <SelectorButton onClick={() => handleButtonClick(inputText)} />
+          <button
+            className="selector-button"
+            onClick={() => handleButtonClick(inputText)}
+          >
+            Show Template
+          </button>
         </div>
       </label>
     </div>
