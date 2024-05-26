@@ -9,47 +9,16 @@
   position: relative;
 }
 
-.template-selector {
+.template-selector,
+.text-generator-container {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
   width: 100%;
 }
 
-.selector-text {
-  flex-grow: 1;
-  padding: 10px;
-  font-size: 1em;
-}
-
-.selector-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.selector-button:hover {
-  background-color: #0056b3;
-}
-
-.text-generator-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.top-text-container,
-.bottom-text-container {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-  width: 100%;
-}
-
+.selector-text,
 .top-text-container input,
 .bottom-text-container input {
   flex-grow: 1;
@@ -57,6 +26,7 @@
   font-size: 1em;
 }
 
+.selector-button,
 .text-button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -66,8 +36,17 @@
   cursor: pointer;
 }
 
+.selector-button:hover,
 .text-button:hover {
   background-color: #0056b3;
+}
+
+.top-text-container,
+.bottom-text-container {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  width: 100%;
 }
 
 ----------------------------------------
@@ -144,8 +123,8 @@ export default ActionsContainer;
 // src/App.css:
 
 .container {
-  margin-top: 20px; /* Add some margin if needed */
-  width: 100%; /* Ensure full width */
+  margin-top: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -153,13 +132,13 @@ export default ActionsContainer;
 }
 
 .meme-display {
-  margin-top: 20px; /* Add some margin if needed */
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: auto; /* Changed from fixed height */
+  height: auto;
   margin-bottom: 20px;
 }
 
@@ -175,9 +154,8 @@ export default ActionsContainer;
   margin-top: 20px;
 }
 
-/* Adjust ActionsContainer positioning */
 .actions-container {
-  margin-top: 50px; /* Increase the margin to push it further down */
+  margin-top: 50px;
 }
 
 ----------------------------------------
@@ -190,7 +168,6 @@ import ActionsContainer from './ActionsContainer';
 import MemeDisplay from './MemeDisplay';
 
 function App() {
-  // Component States
   const [showImage, setShowImage] = useState(true);
   const [imageUrl, setImageUrl] = useState(
     'https://api.memegen.link/images/doge/Hello/World.png',
@@ -198,7 +175,6 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [templates, setTemplates] = useState([]);
 
-  // Effect for fetching meme templates
   useEffect(() => {
     fetch('https://api.memegen.link/templates/')
       .then((response) => response.json())
@@ -211,10 +187,9 @@ function App() {
       });
   }, []);
 
-  // Show Meme Image
   const handleShowImage = (templateName, topText, bottomText) => {
     if (templates.includes(templateName)) {
-      const newImageUrl = `https://api.memegen.link/images/${templateName}/${topText}/${bottomText}.png`; // URL interpolation
+      const newImageUrl = `https://api.memegen.link/images/${templateName}/${topText}/${bottomText}.png`;
       setImageUrl(newImageUrl);
       setShowImage(true);
       setErrorMessage('');
@@ -315,7 +290,7 @@ export default MemeDisplay;
 
 .template-selector {
   display: flex;
-  gap: 10px; /* Space between input and button */
+  gap: 10px;
   width: 100%;
 }
 
@@ -326,37 +301,33 @@ export default MemeDisplay;
 import './TemplateSelector.css';
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown }) => {
-  return (
-    <input
-      className="selector-text"
-      placeholder="Enter Template ID"
-      value={value}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-    />
-  );
-};
+const SelectorText = ({ value, onChange, onKeyDown }) => (
+  <input
+    className="selector-text"
+    placeholder="Enter Template ID"
+    value={value}
+    onChange={onChange}
+    onKeyDown={onKeyDown}
+  />
+);
 
-const SelectorButton = ({ onClick }) => {
-  return (
-    <button className="selector-button" onClick={onClick}>
-      Show Template
-    </button>
-  );
-};
+const SelectorButton = ({ onClick }) => (
+  <button className="selector-button" onClick={onClick}>
+    Show Template
+  </button>
+);
 
 const TemplateSelector = ({ handleButtonClick }) => {
-  const [inputText, setInputText] = useState(''); // Estado para almacenar el texto ingresado
+  const [inputText, setInputText] = useState('');
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      handleButtonClick(inputText); // Llama a handleButtonClick con el texto ingresado si la tecla presionada es Enter
+      handleButtonClick(inputText);
     }
   };
 
   const handleInputChange = (event) => {
-    setInputText(event.target.value); // Actualiza el estado con el texto ingresado
+    setInputText(event.target.value);
   };
 
   return (
@@ -368,10 +339,9 @@ const TemplateSelector = ({ handleButtonClick }) => {
         <SelectorText
           value={inputText}
           onChange={handleInputChange}
-          onKeyDown={handleKeyDown} // Cambiamos el evento a onKeyDown
+          onKeyDown={handleKeyDown}
         />
-        <SelectorButton onClick={() => handleButtonClick(inputText)} />{' '}
-        {/* Llama a handleButtonClick con el texto ingresado al hacer clic en el botón */}
+        <SelectorButton onClick={() => handleButtonClick(inputText)} />
       </div>
     </div>
   );
@@ -414,8 +384,6 @@ export default TemplateSelector;
 
 // src/TextGenerator.js:
 
-// src/TextGenerator.js
-
 import './TextGenerator.css';
 import React from 'react';
 
@@ -440,33 +408,30 @@ const TextGenerator = ({
   handleBottomTextChange,
   handleGenerateClick,
   handleDownloadClick,
-  // imageUrl,
-}) => {
-  return (
-    <div className="text-generator-container common-width">
-      <TextRow
-        label="Top text"
-        id="top-text"
-        value={topText}
-        handleChange={handleTopTextChange}
-      />
-      <TextRow
-        label="Bottom text"
-        id="bottom-text"
-        value={bottomText}
-        handleChange={handleBottomTextChange}
-      />
-      <div className="button-container">
-        <button className="text-button" onClick={handleGenerateClick}>
-          Generate
-        </button>
-        <button className="text-button" onClick={handleDownloadClick}>
-          Download
-        </button>
-      </div>
+}) => (
+  <div className="text-generator-container common-width">
+    <TextRow
+      label="Top text"
+      id="top-text"
+      value={topText}
+      handleChange={handleTopTextChange}
+    />
+    <TextRow
+      label="Bottom text"
+      id="bottom-text"
+      value={bottomText}
+      handleChange={handleBottomTextChange}
+    />
+    <div className="button-container">
+      <button className="text-button" onClick={handleGenerateClick}>
+        Generate
+      </button>
+      <button className="text-button" onClick={handleDownloadClick}>
+        Download
+      </button>
     </div>
-  );
-};
+  </div>
+);
 
 export default TextGenerator;
 
