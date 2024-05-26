@@ -9,8 +9,8 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   const [bottomText, setBottomText] = useState('World');
 
   useEffect(() => {
-    const encodedTopText = encodeURIComponent(topText);
-    const encodedBottomText = encodeURIComponent(bottomText);
+    const encodedTopText = encodeURIComponent(topText.toLowerCase());
+    const encodedBottomText = encodeURIComponent(bottomText.toLowerCase());
     setShowImage(inputText, encodedTopText, encodedBottomText);
   }, [inputText, topText, bottomText, setShowImage]);
 
@@ -42,8 +42,8 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   };
 
   const handleButtonClick = () => {
-    const encodedTopText = encodeURIComponent(topText.replace(/\s/g, '_'));
-    const encodedBottomText = encodeURIComponent(bottomText);
+    const encodedTopText = encodeURIComponent(topText.toLowerCase());
+    const encodedBottomText = encodeURIComponent(bottomText.toLowerCase());
     setShowImage(inputText, encodedTopText, encodedBottomText);
   };
 
