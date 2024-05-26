@@ -1,48 +1,32 @@
 import './TemplateSelector.css';
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown }) => (
-  <input
-    className="selector-text"
-    placeholder="Enter Template ID"
-    value={value}
-    onChange={onChange}
-    onKeyDown={onKeyDown}
-  />
-);
-
-const SelectorButton = ({ onClick }) => (
-  <button className="selector-button" onClick={onClick}>
-    Show Template
-  </button>
-);
-
 const TemplateSelector = ({ handleButtonClick }) => {
-  const [inputText, setInputText] = useState('');
+  const [templateId, setTemplateId] = useState('doge');
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleButtonClick(inputText);
-    }
+  const handleInputChange = (e) => {
+    setTemplateId(e.target.value);
   };
 
-  const handleInputChange = (event) => {
-    setInputText(event.target.value);
+  const handleButtonClickInternal = () => {
+    handleButtonClick(templateId);
   };
 
   return (
-    <div className="template-selector-container">
+    <div className="template-selector common-width">
       <label htmlFor="template-id" className="template-label">
         Meme template
-        <div className="template-selector common-width">
-          <SelectorText
-            value={inputText}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-          />
-          <SelectorButton onClick={() => handleButtonClick(inputText)} />
-        </div>
       </label>
+      <input
+        id="template-id"
+        className="selector-text"
+        placeholder="Enter Template ID"
+        value={templateId}
+        onChange={handleInputChange}
+      />
+      <button className="selector-button" onClick={handleButtonClickInternal}>
+        Show Template
+      </button>
     </div>
   );
 };
