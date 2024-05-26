@@ -42,7 +42,7 @@ const ActionsContainer = ({ setShowImage, imageUrl }) => {
   };
 
   const handleButtonClick = () => {
-    const encodedTopText = encodeURIComponent(topText.replace(/\s/g, '_'));
+    const encodedTopText = encodeURIComponent(topText);
     const encodedBottomText = encodeURIComponent(bottomText);
     setShowImage(inputText, encodedTopText, encodedBottomText);
   };
