@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown, id }) => (
-  <input
-    id={id}
-    className="selector-text"
-    placeholder="Enter Template ID"
-    value={value}
-    onChange={onChange}
-    onKeyDown={onKeyDown}
-  />
+const SelectorText = ({ value, onChange, onKeyDown, id, label }) => (
+  <div className="selector-text-container">
+    <label htmlFor={id} className="template-label">
+      {label}
+    </label>
+    <input
+      id={id}
+      className="selector-text"
+      placeholder="Enter Template ID"
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+    />
+  </div>
 );
 
 const SelectorButton = ({ onClick }) => (
@@ -32,15 +37,13 @@ const TemplateSelector = ({ handleButtonClick }) => {
 
   return (
     <div className="template-selector-container">
-      <label htmlFor="template-id" className="template-label">
-        Meme template
-      </label>
       <div className="template-selector common-width">
         <SelectorText
           value={inputText}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           id="template-id"
+          label="Meme template"
         />
         <SelectorButton onClick={() => handleButtonClick(inputText)} />
       </div>
