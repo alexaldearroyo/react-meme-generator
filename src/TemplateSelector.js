@@ -1,14 +1,18 @@
 import './TemplateSelector.css';
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown }) => (
-  <input
-    className="selector-text"
-    placeholder="Enter Template ID"
-    value={value}
-    onChange={onChange}
-    onKeyDown={onKeyDown}
-  />
+const SelectorText = ({ id, label, value, onChange, onKeyDown }) => (
+  <div>
+    <label htmlFor={id}>{label}</label>
+    <input
+      id={id}
+      className="selector-text"
+      placeholder="Enter Template ID"
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+    />
+  </div>
 );
 
 const SelectorButton = ({ onClick }) => (
@@ -32,11 +36,10 @@ const TemplateSelector = ({ handleButtonClick }) => {
 
   return (
     <div className="template-selector-container">
-      <label htmlFor="template-id" className="template-label">
-        Meme template
-      </label>
       <div className="template-selector common-width">
         <SelectorText
+          id="template-id"
+          label="Meme template"
           value={inputText}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
