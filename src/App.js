@@ -25,9 +25,7 @@ function App() {
 
   const handleShowImage = (templateName, topText, bottomText) => {
     if (templates.includes(templateName)) {
-      const encodedTopText = encodeURIComponent(topText);
-      const encodedBottomText = encodeURIComponent(bottomText);
-      const newImageUrl = `https://api.memegen.link/images/${templateName}/${encodedTopText}/${encodedBottomText}.png`;
+      const newImageUrl = `https://api.memegen.link/images/${templateName}/${topText}/${bottomText}.png`;
       setImageUrl(newImageUrl);
       setShowImage(true);
       setErrorMessage('');
