@@ -6,7 +6,7 @@ import TextGenerator from './TextGenerator';
 const ActionsContainer = ({ setShowImage, imageUrl }) => {
   const [inputText, setInputText] = useState('doge');
   const [topText, setTopText] = useState('Hello');
-  const [bottomText, setBottomText] = useState('World');
+  const [bottomText, setBottomText] = useState('');
 
   useEffect(() => {
     const encodedTopText = encodeURIComponent(topText);
