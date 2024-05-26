@@ -14,6 +14,6 @@
 
 .template-selector {
   display: flex;
-  gap: 10px; /* Space between input and button */
+  gap: 10px;
   width: 100%;
 }

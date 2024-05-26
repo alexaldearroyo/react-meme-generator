@@ -1,37 +1,33 @@
 import './TemplateSelector.css';
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown }) => {
-  return (
-    <input
-      className="selector-text"
-      placeholder="Enter Template ID"
-      value={value}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-    />
-  );
-};
+const SelectorText = ({ value, onChange, onKeyDown }) => (
+  <input
+    className="selector-text"
+    placeholder="Enter Template ID"
+    value={value}
+    onChange={onChange}
+    onKeyDown={onKeyDown}
+  />
+);
 
-const SelectorButton = ({ onClick }) => {
-  return (
-    <button className="selector-button" onClick={onClick}>
-      Show Template
-    </button>
-  );
-};
+const SelectorButton = ({ onClick }) => (
+  <button className="selector-button" onClick={onClick}>
+    Show Template
+  </button>
+);
 
 const TemplateSelector = ({ handleButtonClick }) => {
-  const [inputText, setInputText] = useState(''); // Estado para almacenar el texto ingresado
+  const [inputText, setInputText] = useState('');
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      handleButtonClick(inputText); // Llama a handleButtonClick con el texto ingresado si la tecla presionada es Enter
+      handleButtonClick(inputText);
     }
   };
 
   const handleInputChange = (event) => {
-    setInputText(event.target.value); // Actualiza el estado con el texto ingresado
+    setInputText(event.target.value);
   };
 
   return (
@@ -43,10 +39,9 @@ const TemplateSelector = ({ handleButtonClick }) => {
         <SelectorText
           value={inputText}
           onChange={handleInputChange}
-          onKeyDown={handleKeyDown} // Cambiamos el evento a onKeyDown
+          onKeyDown={handleKeyDown}
         />
-        <SelectorButton onClick={() => handleButtonClick(inputText)} />{' '}
-        {/* Llama a handleButtonClick con el texto ingresado al hacer clic en el botón */}
+        <SelectorButton onClick={() => handleButtonClick(inputText)} />
       </div>
     </div>
   );

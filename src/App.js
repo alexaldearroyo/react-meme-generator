@@ -4,7 +4,6 @@ import ActionsContainer from './ActionsContainer';
 import MemeDisplay from './MemeDisplay';
 
 function App() {
-  // Component States
   const [showImage, setShowImage] = useState(true);
   const [imageUrl, setImageUrl] = useState(
     'https://api.memegen.link/images/doge/Hello/World.png',
@@ -12,7 +11,6 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [templates, setTemplates] = useState([]);
 
-  // Effect for fetching meme templates
   useEffect(() => {
     fetch('https://api.memegen.link/templates/')
       .then((response) => response.json())
@@ -25,10 +23,9 @@ function App() {
       });
   }, []);
 
-  // Show Meme Image
   const handleShowImage = (templateName, topText, bottomText) => {
     if (templates.includes(templateName)) {
-      const newImageUrl = `https://api.memegen.link/images/${templateName}/${topText}/${bottomText}.png`; // URL interpolation
+      const newImageUrl = `https://api.memegen.link/images/${templateName}/${topText}/${bottomText}.png`;
       setImageUrl(newImageUrl);
       setShowImage(true);
       setErrorMessage('');

@@ -1,5 +1,3 @@
-// src/TextGenerator.js
-
 import './TextGenerator.css';
 import React from 'react';
 
@@ -24,32 +22,29 @@ const TextGenerator = ({
   handleBottomTextChange,
   handleGenerateClick,
   handleDownloadClick,
-  // imageUrl,
-}) => {
-  return (
-    <div className="text-generator-container common-width">
-      <TextRow
-        label="Top text"
-        id="top-text"
-        value={topText}
-        handleChange={handleTopTextChange}
-      />
-      <TextRow
-        label="Bottom text"
-        id="bottom-text"
-        value={bottomText}
-        handleChange={handleBottomTextChange}
-      />
-      <div className="button-container">
-        <button className="text-button" onClick={handleGenerateClick}>
-          Generate
-        </button>
-        <button className="text-button" onClick={handleDownloadClick}>
-          Download
-        </button>
-      </div>
+}) => (
+  <div className="text-generator-container common-width">
+    <TextRow
+      label="Top text"
+      id="top-text"
+      value={topText}
+      handleChange={handleTopTextChange}
+    />
+    <TextRow
+      label="Bottom text"
+      id="bottom-text"
+      value={bottomText}
+      handleChange={handleBottomTextChange}
+    />
+    <div className="button-container">
+      <button className="text-button" onClick={handleGenerateClick}>
+        Generate
+      </button>
+      <button className="text-button" onClick={handleDownloadClick}>
+        Download
+      </button>
     </div>
-  );
-};
+  </div>
+);
 
 export default TextGenerator;

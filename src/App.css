@@ -1,6 +1,6 @@
 .container {
-  margin-top: 20px; /* Add some margin if needed */
-  width: 100%; /* Ensure full width */
+  margin-top: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,13 +8,13 @@
 }
 
 .meme-display {
-  margin-top: 20px; /* Add some margin if needed */
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: auto; /* Changed from fixed height */
+  height: auto;
   margin-bottom: 20px;
 }
 
@@ -30,7 +30,6 @@
   margin-top: 20px;
 }
 
-/* Adjust ActionsContainer positioning */
 .actions-container {
-  margin-top: 50px; /* Increase the margin to push it further down */
+  margin-top: 50px;
 }
