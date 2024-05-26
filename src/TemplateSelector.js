@@ -1,9 +1,8 @@
-// Remove the import statement for the CSS file
-// import './TemplateSelector.css';
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown }) => (
+const SelectorText = ({ value, onChange, onKeyDown, id }) => (
   <input
+    id={id}
     className="selector-text"
     placeholder="Enter Template ID"
     value={value}
