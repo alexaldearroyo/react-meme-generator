@@ -35,15 +35,16 @@ const TemplateSelector = ({ handleButtonClick }) => {
     <div className="template-selector-container">
       <label htmlFor="template-id" className="template-label">
         Meme template
-        <div className="template-selector common-width">
-          <SelectorText
-            value={inputText}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-          />
-          <SelectorButton onClick={() => handleButtonClick(inputText)} />
-        </div>
       </label>
+      <div className="template-selector common-width">
+        <SelectorText
+          value={inputText}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          id="template-id"
+        />
+        <SelectorButton onClick={() => handleButtonClick(inputText)} />
+      </div>
     </div>
   );
 };
