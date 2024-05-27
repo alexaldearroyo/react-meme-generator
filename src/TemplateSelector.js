@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-const SelectorText = ({ value, onChange, onKeyDown, id, label }) => (
+const SelectorText = ({ value, onChange, onKeyDown, label }) => (
   <div className="selector-text-container">
-    <label htmlFor={id} className="template-label">
+    <label htmlFor={label} className="template-label">
       {label}
     </label>
     <input
-      id={id}
+      id={label}
       className="selector-text"
       placeholder="Enter Template ID"
       value={value}
@@ -42,7 +42,6 @@ const TemplateSelector = ({ handleButtonClick }) => {
           value={inputText}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          id="template-id"
           label="Meme template"
         />
         <SelectorButton onClick={() => handleButtonClick(inputText)} />
